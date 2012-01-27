@@ -8,6 +8,7 @@ var loader = require('../lib/loader')
 
 var TEST_FIXTURE=__dirname + '/fixtures/test-ok.json';
 var FAILING_TEST_FIXTURE=__dirname + '/fixtures/test-failing.json';
+var EMPTY_TEST_FIXTURE=__dirname + '/fixtures/empty.json';
 
 describe('parseLine', function(){
   var line = '{ "name" : "R1", "_id" : { "$oid" : "4f21bb06a8bf63b40c000001" } }'
@@ -106,6 +107,31 @@ describe('loadFixtures', function(){
       failed.should.equal(2);
       should.exist(err);
       err.should.be.an.instanceof(Array);
+      done();
+    }
+  });
+
+
+  it('load from empty file', function(done){
+    /* all should fail since we have them already */
+    var count=0;
+    var ok=0;
+    var failed =0;
+    loader.loadFixtures(models.ParentChild, EMPTY_TEST_FIXTURE
+        , gotDoc, gotDone);
+    
+    function gotDoc(err, doc){
+      if(err) failed++;
+      else ok++;
+      count++;
+      
+    }
+    function gotDone(err){
+      console.log("gotDone");
+      count.should.equal(0);
+      ok.should.equal(0);
+      failed.should.equal(0);
+      should.not.exist(err);
       done();
     }
   });
