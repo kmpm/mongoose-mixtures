@@ -3,55 +3,18 @@ var assert = require('assert')
 
 var ObjectId = require('mongoose').Types.ObjectId;
 
-var loader = require('../lib/loader')
+var mixtures = require('../index')
   , models = require('./models');
 
 var TEST_FIXTURE=__dirname + '/fixtures/test-ok.json';
 var FAILING_TEST_FIXTURE=__dirname + '/fixtures/test-failing.json';
 var EMPTY_TEST_FIXTURE=__dirname + '/fixtures/empty.json';
 
-describe('parseLine', function(){
-  var line = '{ "name" : "R1", "_id" : { "$oid" : "4f21bb06a8bf63b40c000001" } }'
-  var r = loader.parseLine(line);
-  it('should return an object', function(){
-    r._id.should.be.a('object');
-  });
 
-  it('should have all properties', function(){
-    r.should.have.property('name', "R1");
-    r.should.have.property('_id');
-  });
-
-  it('should fix ObjectId', function(){
-    r._id.should.be.an.instanceof(ObjectId);
-  });
-});
-
-
-describe('loadLines', function(){
-  it('should call done after all has been loaded', function(done){
-    var count=0;
-    loader.loadLines(TEST_FIXTURE, gotItem, gotDone);
-
-    function gotItem(item){
-      item.should.be.a('object');
-      item.should.have.property('name');
-      item.should.have.property('_id');
-      count++;
-    }
-
-    function gotDone(){
-      count.should.equal(2);
-      done();
-    }
-  });
-});
-
-
-describe('loadFixtures', function(){
+describe('load', function(){
   it('should be saved as models', function(done){
     var count=0;
-    loader.loadFixtures(models.ParentChild, TEST_FIXTURE, gotDoc, gotDone);
+    mixtures.load(models.ParentChild, TEST_FIXTURE, gotDoc, gotDone);
 
     function gotDoc(err, doc){
       if(err) throw err;
@@ -68,7 +31,7 @@ describe('loadFixtures', function(){
     var count=0;
     var ok=0;
     var failed =0;
-    loader.loadFixtures(models.ParentChild, FAILING_TEST_FIXTURE
+    mixtures.load(models.ParentChild, FAILING_TEST_FIXTURE
         , gotDoc, gotDone);
     
     function gotDoc(err, doc){
@@ -92,7 +55,7 @@ describe('loadFixtures', function(){
     var count=0;
     var ok=0;
     var failed =0;
-    loader.loadFixtures(models.ParentChild, TEST_FIXTURE
+    mixtures.load(models.ParentChild, TEST_FIXTURE
         , gotDoc, gotDone, {remove:false});
     
     function gotDoc(err, doc){
@@ -117,7 +80,7 @@ describe('loadFixtures', function(){
     var count=0;
     var ok=0;
     var failed =0;
-    loader.loadFixtures(models.ParentChild, EMPTY_TEST_FIXTURE
+    mixtures.load(models.ParentChild, EMPTY_TEST_FIXTURE
         , gotDoc, gotDone);
     
     function gotDoc(err, doc){
