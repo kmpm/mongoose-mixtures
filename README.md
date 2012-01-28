@@ -9,15 +9,17 @@ at the same time.
 
 
 ## Usage
-to be done!
-for the moment look at test/test.loader.js
+To be done!
+
+...for the moment look at test/test.loader.js
 
 
 
 ## Installation
 For the moment it's not available in the npm registry.
-* clone the repository
-* cd into you project where you wan't to use it.
-* npm install <path to mongoose-mixtures clone>
+
+ * clone the repository
+ * cd into you project where you wan't to use it.
+ * npm install <path to mongoose-mixtures clone>
 
 
