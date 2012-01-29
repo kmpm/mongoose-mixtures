@@ -10,7 +10,7 @@ var mixtures = require('../index')
 var TEST_FIXTURE=__dirname + '/fixtures/test-ok.json';
 var FAILING_TEST_FIXTURE=__dirname + '/fixtures/test-failing.json';
 var EMPTY_TEST_FIXTURE=__dirname + '/fixtures/empty.json';
-var HUGE_TEST_FIXTURE = __dirname + '/huge.json';
+var HUGE_TEST_FIXTURE = __dirname + '/../huge.json';
 
 describe('load', function(){
   before(function(done){
@@ -107,21 +107,31 @@ describe('load', function(){
   });
 
   it('load huge', function(done){
-    this.timeout(30000);
+    this.timeout(120000);
     var failed=0;
     var ok=0;
     var count =0;
+    var interval = 5000;
+    var next = interval;
     mixtures.load(models.Huge, HUGE_TEST_FIXTURE, gotDoc, gotDone);
 
     function gotDoc(err, doc){
       count++;
       if(err) failed++;
       else ok++;   
+      if(count>=next){
+        console.log(new Date(), count);
+        next += interval;
+      }
     }
     function gotDone(err){
       count.should.equal(ok+failed);
-      console.log("count", count);
-      done();
+      models.Huge.find().count(function(err, result){
+        if(err) throw err;
+        result.should.equal(ok);
+        done();
+      })
+      
     }
   });
 

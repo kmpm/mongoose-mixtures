@@ -11,20 +11,26 @@ function createHuge(filename, done){
 		done();
 		return;
 	}
-	var interval = 10000
+	var interval = 50000
 	var next = interval;
-	var drained=false;
+	var drained=true;
 	var ws = fs.createWriteStream(filename);
 	
 	ws.on('open', function(fd){
 		var line="";
 		var i=0;
-		console.log("opened", fd);
+		var d1=false;
+		var d2=false;
+		console.log("creating", filename);
 		while(i <= LINE_COUNT){
-			line += template.replace('%h', rHex(i));
+			
 			if(drained){
-				ws.write(line, 'utf-8', fd);
-				//console.log(drained, line);
+				line += template.replace('%h', rHex(i));
+				d1 = ws.write(line, 'utf-8', fd);
+				if(d1 != d2){
+					console.log(d1, i, line);
+					d2=d1;
+				}
 				line="";
 				if(i>=next){
 					console.log(i);
