@@ -9,6 +9,10 @@ var ParentChild = new Schema({
 });
 
 
+var Huge = new Schema({
+    name    : {type: String, required:true}
+});
+
 function Models(){
   this.mongoose = require('mongoose');
   this.database = global.process.env.TEST_DB || "mongodb://localhost/test-mixtures"
@@ -19,6 +23,9 @@ Models.prototype.__defineGetter__('ParentChild', function(){
   return this.mongoose.model('ParentChild', ParentChild);
 });
 
+Models.prototype.__defineGetter__('Huge', function(){
+	return this.mongoose.model('Huge', Huge);
+})
 
 
 module.exports = new Models();
