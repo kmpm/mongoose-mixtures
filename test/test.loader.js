@@ -107,6 +107,7 @@ describe('load', function(){
   });
 
   it('load huge', function(done){
+    this.timeout(30000);
     var failed=0;
     var ok=0;
     var count =0;
