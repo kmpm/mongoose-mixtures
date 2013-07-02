@@ -14,7 +14,7 @@ var EMPTY_TEST_FIXTURE=__dirname + '/fixtures/empty.json';
 describe('load', function(){
   it('should be saved as models', function(done){
     var count=0;
-    mixtures.load(models.ParentChild, TEST_FIXTURE, gotDoc, gotDone);
+    mixtures.load(models.ParentChild, TEST_FIXTURE, {gotdoc:gotDoc}, gotDone);
 
     function gotDoc(err, doc){
       if(err) throw err;
@@ -23,8 +23,15 @@ describe('load', function(){
 
     function gotDone(){
       count.should.equal(2);
-      done();
+      models.ParentChild.find({}, function(err, list){
+        should.not.exist(err);
+        list.should.be.instanceof(Array);
+        list.should.have.length(2);
+        done();
+      });
     }
+
+
   });
 
   it('load with failing', function(done){
@@ -32,7 +39,7 @@ describe('load', function(){
     var ok=0;
     var failed =0;
     mixtures.load(models.ParentChild, FAILING_TEST_FIXTURE
-        , gotDoc, gotDone);
+        , {gotdoc:gotDoc}, gotDone);
     
     function gotDoc(err, doc){
       if(err) failed++;
@@ -56,7 +63,7 @@ describe('load', function(){
     var ok=0;
     var failed =0;
     mixtures.load(models.ParentChild, TEST_FIXTURE
-        , gotDoc, gotDone, {remove:false});
+        ,{gotdoc:gotDoc, remove:false}, gotDone);
     
     function gotDoc(err, doc){
       if(err) failed++;

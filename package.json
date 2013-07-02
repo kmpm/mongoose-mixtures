@@ -1,6 +1,6 @@
 {
     "name": "mixtures"
-  , "version": "0.0.1"
+  , "version": "0.0.2"
   , "private": false
   , "author": "Peter Magnusson <peter@birchroad.net>"
   , "description": "Fixture loading framework for mongoose"
@@ -10,18 +10,15 @@
     , "url":"git://github.com/kmpm/node-mixtures"
   }
   , "main":"./index.js"
-  , "engines": {
-      "node": "~v0.6.0"
-  }
   , "dependencies": {
-      "mongoose": ">= 0.0.1"
+      "mongoose": "*"
   }
   , "devDependencies": {
-      "mocha": ">= 0.10.2"
-    , "should": ">= 0.5.1"
-    , "expect": ">= 0.0.2"
-    , "mongodb": ">= 0.9.7"
-    , "url": ">= 0.4.9"
+      "mocha": "*"
+    , "should": "*"
+    , "expect": "*"
+    , "mongodb": "*"
+    , "url": "*"
   }
   , "scripts": {
       "test": "mocha --reporter spec"
