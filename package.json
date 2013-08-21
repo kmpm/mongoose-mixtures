@@ -1,13 +1,13 @@
 {
     "name": "mixtures"
-  , "version": "0.0.2"
+  , "version": "0.0.3"
   , "private": false
   , "author": "Peter Magnusson <peter@birchroad.net>"
   , "description": "Fixture loading framework for mongoose"
   , "homepage": "http://github.com/kmpm/node-mixtures"
   , "repository": {
       "type":"git"
-    , "url":"git://github.com/kmpm/node-mixtures"
+    , "url":"git://github.com/kmpm/node-mixtures.git"
   }
   , "main":"./index.js"
   , "dependencies": {

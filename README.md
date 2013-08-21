@@ -16,10 +16,7 @@ To be done!
 
 
 ## Installation
-For the moment it's not available in the npm registry.
-
- * clone the repository
- * cd into you project where you wan't to use it.
- * npm install <path to mongoose-mixtures clone>
-
+```
+  npm install mixtures
+```
 
