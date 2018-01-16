@@ -1,6 +1,6 @@
 {
     "name": "mixtures",
-    "version": "0.1.0",
+    "version": "1.0.0",
     "private": false,
     "author": "Peter Magnusson <peter@birchroad.net>",
     "description": "Fixture loading framework for mongoose",
@@ -12,6 +12,7 @@
     },
     "main": "./index.js",
     "dependencies": {
+        "debug": "^3.1.0",
         "mongoose": "~4.13.9"
     },
     "devDependencies": {
