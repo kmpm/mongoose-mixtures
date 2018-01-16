@@ -5,6 +5,7 @@
     "author": "Peter Magnusson <peter@birchroad.net>",
     "description": "Fixture loading framework for mongoose",
     "homepage": "http://github.com/kmpm/mongoose-mixtures",
+    "license": "MIT",
     "repository": {
         "type": "git",
         "url": "git://github.com/kmpm/mongoose-mixtures.git"
