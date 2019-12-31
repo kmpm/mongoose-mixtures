@@ -12,7 +12,7 @@ var ParentChild = new Schema({
 function Models(){
   this.mongoose = require('mongoose');
   this.database = global.process.env.TEST_DB || "mongodb://localhost/test-mixtures"
-  this.mongoose.connect(this.database, {useMongoClient: true});
+  this.mongoose.connect(this.database, {useNewUrlParser: true, useUnifiedTopology: true});
 }
 
 Models.prototype.__defineGetter__('ParentChild', function(){
